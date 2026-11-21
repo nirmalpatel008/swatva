@@ -63,6 +63,13 @@ swatva scan path/to/erp.db path/to/admissions.xlsx path/to/folder -o my-report
 
 Open `my-report/swatva-report.html` in a browser.
 
+**On Windows:** if `swatva` is not recognised after installing, use `python -m swatva` instead. It does exactly the same thing:
+
+```
+python -m swatva scan sample_data
+start swatva-report\swatva-report.html
+```
+
 Options: `--sample 5000` reads more rows per table, `--format html` writes only one format, `-q` skips the terminal summary.
 
 ## What it finds

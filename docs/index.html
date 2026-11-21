@@ -123,8 +123,9 @@ pre .c { color: var(--muted); }
 code { font-family: var(--mono); font-size: .88em; }
 
 footer { border-top: 1px solid var(--rule); padding: 36px 0 56px; color: var(--muted); font-size: 15px; }
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
-footer p { margin: 0; max-width: 60ch; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; }
+footer p { margin: 0; }
+footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); }
 
 @media (max-width: 900px) {
   .hero, .split { grid-template-columns: 1fr; gap: 40px; }
@@ -258,7 +259,7 @@ swatva scan sample_data
 
 <footer>
   <div class="wrap">
-    <p>Swatva (स्वत्व) means what is one’s own. Free and open source under the MIT license. It helps you prepare and is not legal advice.</p>
+    <p><span class="word">स्वत्व</span> means what is one’s own. Free and open source under the MIT license. Not legal advice.</p>
     <p><a href="https://github.com/nirmalpatel008/swatva">github.com/nirmalpatel008/swatva</a></p>
   </div>
 </footer>
