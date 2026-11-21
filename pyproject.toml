@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swatva"
+version = "0.1.0"
+description = "Find personal data in a small organization's own databases and files, for DPDP Act readiness. Runs locally; nothing leaves your machine."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Nirmal Chhodvadiya" }]
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["privacy", "dpdp", "india", "data-protection", "pii", "data-discovery"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Security",
+    "Environment :: Console",
+]
+
+[project.optional-dependencies]
+excel = ["openpyxl>=3.0"]
+dev = ["pytest>=7", "openpyxl>=3.0"]
+
+[project.scripts]
+swatva = "swatva.cli:main"
+
+[project.urls]
+Homepage = "https://swatva.org"
+
+[tool.setuptools]
+packages = ["swatva"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

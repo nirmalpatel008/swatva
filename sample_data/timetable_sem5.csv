@@ -1,0 +1,21 @@
+Day,Slot,Subject Code,Subject Name,Room
+Mon,09:00,3160712,Microprocessor and Interfacing,Lab-4
+Mon,10:00,3150711,Software Engineering,Lab-1
+Mon,11:15,3160707,Advanced Java Programming,Lab-3
+Mon,12:15,3160712,Microprocessor and Interfacing,Lab-1
+Tue,09:00,3170717,Cloud Computing,Lab-4
+Tue,10:00,3170716,Artificial Intelligence,Lab-4
+Tue,11:15,3170716,Artificial Intelligence,Lab-3
+Tue,12:15,3150711,Software Engineering,Lab-1
+Wed,09:00,3150711,Software Engineering,Lab-5
+Wed,10:00,3150703,Analysis and Design of Algorithms,Lab-3
+Wed,11:15,3160707,Advanced Java Programming,Lab-5
+Wed,12:15,3150703,Analysis and Design of Algorithms,Lab-2
+Thu,09:00,3170716,Artificial Intelligence,Lab-2
+Thu,10:00,3170716,Artificial Intelligence,Lab-5
+Thu,11:15,3160712,Microprocessor and Interfacing,Lab-4
+Thu,12:15,3170716,Artificial Intelligence,Lab-3
+Fri,09:00,3160707,Advanced Java Programming,Lab-6
+Fri,10:00,3160712,Microprocessor and Interfacing,Lab-2
+Fri,11:15,3150703,Analysis and Design of Algorithms,Lab-6
+Fri,12:15,3170716,Artificial Intelligence,Lab-4
