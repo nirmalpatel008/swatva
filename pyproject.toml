@@ -9,7 +9,7 @@ description = "Find personal data in a small organization's own databases and fi
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Nirmal Chhodvadiya" }]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = []
 keywords = ["privacy", "dpdp", "india", "data-protection", "pii", "data-discovery"]
 classifiers = [

@@ -46,7 +46,7 @@ See a full example in [`docs/sample-report.md`](docs/sample-report.md).
 
 ## Quick start
 
-Needs Python 3.9 or newer.
+Needs Python 3.10 or newer.
 
 ```bash
 git clone https://github.com/nirmalpatel008/swatva.git
