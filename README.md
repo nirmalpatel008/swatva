@@ -1,6 +1,10 @@
 # Swatva
 
+[![tests](https://github.com/nirmalpatel008/swatva/actions/workflows/ci.yml/badge.svg)](https://github.com/nirmalpatel008/swatva/actions/workflows/ci.yml)
+
 **Find the personal data your organization holds. On your own machine. For free.**
+
+[Website](https://swatva.org) | [Try it in your browser](https://swatva.org/try.html) | [Sample report](https://swatva.org/sample-report.html) | [Changelog](CHANGELOG.md)
 
 Swatva (स्वत्व, "what is one's own") is an open-source toolkit that helps small Indian organizations get ready for the Digital Personal Data Protection (DPDP) Act, 2023. It starts with colleges.
 
@@ -39,7 +43,7 @@ See a full example in [`docs/sample-report.md`](docs/sample-report.md).
 
 ## The privacy promise
 
-- **Nothing leaves your machine.** No cloud, no upload, no telemetry, no network calls at all.
+- **Nothing leaves your machine.** No cloud, no upload, no telemetry. The installed tool makes no network calls at all. The [browser version](https://swatva.org/try.html) downloads Swatva's code once, then scans your file inside the page without sending it anywhere.
 - **Files are opened read-only.** Swatva never changes your data.
 - **Reports never show full values.** Every example is masked (`XXXXXXXX3898`, `r***@gmail.com`, `R. P.`), so a report is safe to share with your principal or your auditor.
 - **No dependencies** beyond Python itself (Excel support needs `openpyxl`).
@@ -77,6 +81,17 @@ swatva scan examples/student_list_sem3.xlsx
 swatva scan path/to/erp.db path/to/admissions.xlsx path/to/folder -o my-report
 ```
 
+Open `my-report/swatva-report.html` in a browser.
+
+**On Windows:** if `swatva` is not recognised after installing, use `python -m swatva` instead. It does exactly the same thing:
+
+```
+python -m swatva scan sample_data
+start swatva-report\swatva-report.html
+```
+
+Options: `--sample 5000` reads more rows per table, `--format html` writes only one format, `-q` skips the terminal summary.
+
 ### What's in the sample data
 
 Everything is made up: no real person's data is in this repo.
@@ -90,17 +105,6 @@ Everything is made up: no real person's data is in this repo.
 | `examples/student_list_sem3.xlsx` | A real-world style Excel sheet: title rows above the headers, numbers stored as numbers, and a second sheet with Gujarati column names |
 
 `python scripts/make_sample_data.py` rebuilds all of them.
-
-Open `my-report/swatva-report.html` in a browser.
-
-**On Windows:** if `swatva` is not recognised after installing, use `python -m swatva` instead. It does exactly the same thing:
-
-```
-python -m swatva scan sample_data
-start swatva-report\swatva-report.html
-```
-
-Options: `--sample 5000` reads more rows per table, `--format html` writes only one format, `-q` skips the terminal summary.
 
 ## What it finds
 

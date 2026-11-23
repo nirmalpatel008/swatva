@@ -1,6 +1,6 @@
 # Swatva personal data map
 
-Scanned 2026-11-21 15:34:08 with Swatva 0.1.0. Up to 1000 rows sampled per table.
+Scanned 2026-11-23 13:39:15 with Swatva 0.1.1. Up to 1000 rows sampled per table.
 
 ## Summary
 
