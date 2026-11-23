@@ -23,6 +23,7 @@
   --code-bg: #F0F2F7;
   --display: "Tiro Devanagari Hindi", Georgia, serif;
   --body: "Hind Vadodara", system-ui, sans-serif;
+  --measure: 760px;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
@@ -70,7 +71,7 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5.4vw
 .btn.plain:hover { border-color: var(--ink); }
 
 /* The register */
-.register { background: var(--sheet); border: 1px solid var(--rule); border-radius: 4px; box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(27, 47, 122, .45); position: relative; overflow: hidden; }
+.register { margin: 0; background: var(--sheet); border: 1px solid var(--rule); border-radius: 4px; box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(27, 47, 122, .45); position: relative; overflow: hidden; }
 .register::before { content: ""; position: absolute; top: 0; bottom: 0; left: 44px; width: 1.5px; background: var(--margin); }
 .reg-head { padding: 14px 18px 12px 60px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); }
 .reg-head b { color: var(--text); font-weight: 600; }
@@ -99,7 +100,7 @@ table.reg { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 section.band { padding: 72px 0; border-top: 1px solid var(--rule); }
 h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.4vw, 40px); line-height: 1.15; color: var(--ink); margin: 0 0 20px; }
 h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
-.prose { max-width: 66ch; }
+.prose, .ledger, .plan, .faq { max-width: var(--measure); }
 .prose p { margin: 0 0 18px; }
 
 .deadline { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-items: start; }
@@ -110,8 +111,8 @@ h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
 .duties { list-style: none; padding: 0; margin: 6px 0 0; border-top: 1px solid var(--ink); }
 .duties li { padding: 18px 0; border-bottom: 1px solid var(--rule); font-size: 19px; line-height: 1.4; }
 
-.ledger { margin: 8px 0 0; border-top: 1px solid var(--rule); max-width: 880px; }
-.ledger div { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.ledger { margin: 8px 0 0; border-top: 1px solid var(--rule); }
+.ledger div { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
 .ledger dt { font-weight: 600; }
 .ledger dd { margin: 0; color: var(--muted); }
 
@@ -126,7 +127,7 @@ pre { background: var(--code-bg); border-radius: 8px; padding: 20px 22px; overfl
 pre .c { color: var(--muted); }
 code { font-family: var(--mono); font-size: .88em; }
 
-.faq { margin: 8px 0 0; border-top: 1px solid var(--ink); max-width: 880px; }
+.faq { margin: 8px 0 0; border-top: 1px solid var(--ink); }
 .faq details { border-bottom: 1px solid var(--rule); }
 .faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 24px; gap: 16px; align-items: baseline; padding: 18px 0; font-weight: 600; }
 .faq summary::-webkit-details-marker { display: none; }
