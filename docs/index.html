@@ -117,10 +117,10 @@ h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
 .ledger dd { margin: 0; color: var(--muted); }
 
 .plan { list-style: none; padding: 0; margin: 12px 0 0; counter-reset: step; }
-.plan li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 18px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); counter-increment: step; }
+.plan li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); counter-increment: step; }
 .plan li::before { content: counter(step); font-family: var(--display); font-size: 30px; color: var(--ink); line-height: 1; }
 .plan p { margin: 0; color: var(--muted); }
-.state { font-size: 14px; color: var(--muted); white-space: nowrap; }
+.state { font: 400 14px/1 var(--body); color: var(--muted); white-space: nowrap; margin-left: 12px; vertical-align: 2px; }
 .state.live { color: var(--mark-text); background: var(--mark); padding: 2px 8px; border-radius: 2px; }
 
 pre { background: var(--code-bg); border-radius: 8px; padding: 20px 22px; overflow-x: auto; font: 14.5px/1.7 var(--mono); margin: 20px 0 0; }
@@ -135,7 +135,7 @@ code { font-family: var(--mono); font-size: .88em; }
 .faq details[open] summary::after { content: "\2212"; }
 .faq summary:hover { color: var(--ink); }
 .faq summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 3px; }
-.faq .a { padding: 0 40px 20px 0; color: var(--muted); }
+.faq .a { padding: 0 0 20px 0; color: var(--muted); }
 .faq .a p { margin: 0 0 12px; }
 .faq .a p:last-child { margin: 0; }
 
@@ -156,7 +156,6 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
   .wrap { padding: 0 16px; }
   .top { flex-direction: column; gap: 8px; }
   .plan li { grid-template-columns: 40px minmax(0, 1fr); }
-  .plan .state { grid-column: 2; }
   .register::before { left: 32px; }
   .reg-head, .reg-foot, .reg tr > :first-child { padding-left: 44px; }
   section.band { padding: 56px 0; }
@@ -248,10 +247,10 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
     <h2>The plan</h2>
     <p class="prose" style="color:var(--muted);margin:0">Swatva grows in four steps, built with the colleges that use it. Their IT staff decide what it checks first.</p>
     <ol class="plan">
-      <li><div><h3>Find</h3><p>Map where personal data lives across databases and files.</p></div><span class="state live">Available now</span></li>
-      <li><div><h3>Track</h3><p>Keep a change log of personal data, so a college can show what happened to a record and when.</p></div><span class="state">2027</span></li>
-      <li><div><h3>Act</h3><p>Answer a student’s request to see or delete their data in one search, and walk staff through a breach report.</p></div><span class="state">2027</span></li>
-      <li><div><h3>Explain</h3><p>Generate plain-language notices and consent forms in English, Gujarati and Hindi.</p></div><span class="state">2027</span></li>
+      <li><div><h3>Find <span class="state live">Available now</span></h3><p>Map where personal data lives across databases and files.</p></div></li>
+      <li><div><h3>Track <span class="state">2027</span></h3><p>Keep a change log of personal data, so a college can show what happened to a record and when.</p></div></li>
+      <li><div><h3>Act <span class="state">2027</span></h3><p>Answer a student’s request to see or delete their data in one search, and walk staff through a breach report.</p></div></li>
+      <li><div><h3>Explain <span class="state">2027</span></h3><p>Generate plain-language notices and consent forms in English, Gujarati and Hindi.</p></div></li>
     </ol>
   </div>
 </section>
