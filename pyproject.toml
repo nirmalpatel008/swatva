@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "swatva"
-version = "0.1.1"
+version = "0.1.2"
 description = "Find personal data in a small organization's own databases and files, for DPDP Act readiness. Runs locally; nothing leaves your machine."
 readme = "README.md"
 license = { text = "MIT" }

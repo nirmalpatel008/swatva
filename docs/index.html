@@ -101,15 +101,14 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.4vw
 h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
 .prose { max-width: 66ch; }
 .prose p { margin: 0 0 18px; }
-.split { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 56px; }
-.date { font-family: var(--display); font-size: clamp(54px, 7vw, 92px); line-height: 1; color: var(--ink); margin: 0 0 10px; }
-.date-note { color: var(--muted); font-size: 16px; max-width: 26ch; }
 
 .duties { list-style: none; padding: 0; margin: 8px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
 .duties li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
 
-.promise { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 12px; }
-.promise p { margin: 0; color: var(--muted); }
+.ledger { margin: 8px 0 0; border-top: 1px solid var(--rule); max-width: 880px; }
+.ledger div { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.ledger dt { font-weight: 600; }
+.ledger dd { margin: 0; color: var(--muted); }
 
 .plan { list-style: none; padding: 0; margin: 12px 0 0; counter-reset: step; }
 .plan li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 18px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); counter-increment: step; }
@@ -128,9 +127,9 @@ footer p { margin: 0; }
 footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); }
 
 @media (max-width: 900px) {
-  .hero, .split { grid-template-columns: 1fr; gap: 40px; }
+  .hero { grid-template-columns: 1fr; gap: 40px; }
   .hero { padding: 48px 0 64px; }
-  .promise { grid-template-columns: 1fr; gap: 24px; }
+  .ledger div { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (max-width: 620px) {
   body { font-size: 17px; }
@@ -188,23 +187,17 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 </div>
 
 <section class="band">
-  <div class="wrap split">
-    <div>
-      <p class="date">13 May 2027</p>
-      <p class="date-note">The day most duties under the DPDP Act become enforceable.</p>
-    </div>
-    <div class="prose">
-      <h2>Every college has to answer for the data it keeps</h2>
-      <p>Colleges hold years of Aadhaar and APAAR IDs, scholarship bank details, caste and income certificates, marks and phone numbers. Under the Digital Personal Data Protection Act, 2023, each of them will have to:</p>
-      <ul class="duties">
-        <li>Tell students what it collects and why</li>
-        <li>Keep that data safe from leaks and misuse</li>
-        <li>Report a breach within 72 hours</li>
-        <li>Let students see, correct or delete their data</li>
-      </ul>
-      <p style="margin-top:24px">There’s no exemption for being small. Large institutions will buy software and hire consultants. A college with a two-person IT team can’t, and the first question it struggles with is the simplest one: where is our personal data?</p>
-    </div>
-  </div>
+  <div class="wrap"><div class="prose">
+    <h2>From 13 May 2027, every college has to answer for the data it keeps</h2>
+    <p>Colleges hold years of Aadhaar and APAAR IDs, scholarship bank details, caste and income certificates, marks and phone numbers. Under the Digital Personal Data Protection Act, 2023, each of them will have to:</p>
+    <ul class="duties">
+      <li>Tell students what it collects and why</li>
+      <li>Keep that data safe from leaks and misuse</li>
+      <li>Report a breach within 72 hours</li>
+      <li>Let students see, correct or delete their data</li>
+    </ul>
+    <p style="margin-top:24px">There’s no exemption for being small. Large institutions will buy software and hire consultants. A college with a two-person IT team can’t, and the first question it struggles with is the simplest one: where is our personal data?</p>
+  </div></div>
 </section>
 
 <section class="band">
@@ -221,11 +214,11 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 <section class="band">
   <div class="wrap">
     <h2>Built to be safe to run</h2>
-    <div class="promise">
-      <div><h3>Nothing leaves your machine</h3><p>No cloud, no upload, no tracking. Swatva makes no network calls at all.</p></div>
-      <div><h3>Read-only</h3><p>Files and databases are opened for reading. Swatva never changes your data.</p></div>
-      <div><h3>Masked reports</h3><p>Reports never show full identifiers, so you can share one with your principal or auditor.</p></div>
-    </div>
+    <dl class="ledger">
+      <div><dt>Nothing leaves your machine</dt><dd>No cloud, no upload, no tracking. The installed tool makes no network calls, and the browser version scans your file inside the page.</dd></div>
+      <div><dt>Read-only</dt><dd>Files and databases are opened for reading. Swatva never changes your data.</dd></div>
+      <div><dt>Masked reports</dt><dd>Reports never show full identifiers, so you can share one with your principal or auditor.</dd></div>
+    </dl>
   </div>
 </section>
 

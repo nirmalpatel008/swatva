@@ -12,14 +12,14 @@
 <style>
 :root {
   --paper: #FAFBFC; --sheet: #FFFFFF; --ink: #1B2F7A; --text: #1E2330; --muted: #586174;
-  --rule: #DCE1EA; --mark: #FFE36E; --mark-text: #1E2330; --code-bg: #F0F2F7; --bad: #9A2A2A;
+  --rule: #DCE1EA; --margin: #E7A1A1; --mark: #FFE36E; --mark-text: #1E2330; --code-bg: #F0F2F7; --bad: #9A2A2A;
   --display: "Tiro Devanagari Hindi", Georgia, serif;
   --body: "Hind Vadodara", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root { --paper: #10141F; --sheet: #161B29; --ink: #A9B8FF; --text: #E6E9F2; --muted: #9AA3B8;
-    --rule: #2A3144; --mark: #6B5A0F; --mark-text: #FFF3B8; --code-bg: #1C2233; --bad: #F2A3A3; }
+    --rule: #2A3144; --margin: #7A3C42; --mark: #6B5A0F; --mark-text: #FFF3B8; --code-bg: #1C2233; --bad: #F2A3A3; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--text); font: 400 18px/1.6 var(--body); }
@@ -38,9 +38,10 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 4.6vw
 .intro p { margin: 0 0 14px; font-size: 19px; }
 .promise { color: var(--muted); font-size: 16px !important; }
 
-.drop { display: block; border: 2px dashed var(--rule); border-radius: 10px; background: var(--sheet); padding: 40px 24px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
-.drop:hover, .drop.over { border-color: var(--ink); }
-.drop strong { display: block; font-family: var(--display); font-weight: 400; font-size: 26px; color: var(--ink); margin-bottom: 6px; }
+.drop { display: block; position: relative; border: 1px solid var(--rule); border-radius: 4px; background: var(--sheet); padding: 44px 24px 44px 72px; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.drop::before { content: ""; position: absolute; top: 0; bottom: 0; left: 48px; width: 1.5px; background: var(--margin); }
+.drop:hover, .drop.over { border-color: var(--ink); box-shadow: 0 18px 40px -30px rgba(27, 47, 122, .5); }
+.drop strong { display: block; font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1.25; color: var(--ink); margin-bottom: 6px; }
 .drop span { color: var(--muted); font-size: 16px; }
 .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .drop.busy { pointer-events: none; opacity: .6; }
@@ -75,7 +76,8 @@ code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); p
   .wrap { padding: 0 16px; }
   .top { flex-direction: column; gap: 8px; }
   .intro { padding: 36px 0 24px; }
-  .drop { padding: 28px 16px; }
+  .drop { padding: 32px 16px 32px 52px; }
+  .drop::before { left: 34px; }
 }
 </style>
 </head>

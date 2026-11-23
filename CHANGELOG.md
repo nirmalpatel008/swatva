@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 (November 2026)
+
+- A redesigned report: a short written summary at the top, one table of what was found with advice for each kind of data, and a cleaner section for every table. It reads well on phones, in dark mode and when printed, and still makes no network requests.
+- Confidence is shown only when it is not high, so the tables stay quiet.
+
 ## 0.1.1 (November 2026)
 
 - **Try it in your browser** at [swatva.org/try.html](https://swatva.org/try.html): choose an Excel, CSV or SQLite file and get the report on the page. Nothing is uploaded.

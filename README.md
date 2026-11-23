@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/nirmalpatel008/swatva/actions/workflows/ci.yml/badge.svg)](https://github.com/nirmalpatel008/swatva/actions/workflows/ci.yml)
 
-**Find the personal data your organization holds. On your own machine. For free.**
+**Find the personal data your organization holds, on your own machine, for free.**
 
 [Website](https://swatva.org) | [Try it in your browser](https://swatva.org/try.html) | [Sample report](https://swatva.org/sample-report.html) | [Changelog](CHANGELOG.md)
 
