@@ -136,6 +136,18 @@ This is a starting point, not a compliance certificate.
 - It doesn't yet connect to MySQL, PostgreSQL, Google Drive or college ERP systems directly. Export to CSV for now.
 - It is not legal advice.
 
+## Similar tools
+
+Other open-source projects work on parts of the same problem, and they're worth knowing about:
+
+- [truScanner](https://github.com/truconsent/truscanner) by truConsent scans **source code** for over 300 kinds of personal data, with optional AI providers.
+- [dpdp-scan](https://github.com/statecheck-security/dpdp-scan) finds Indian identifiers such as Aadhaar, PAN, UPI and IFSC in **code, schemas, fixtures and logs**, and maps findings to the DPDP Act.
+- [tsi-dpdp-cms](https://github.com/tsi-coop/tsi-dpdp-cms) is an open-source **consent management** system for the DPDP Act.
+- [PrivacyHub](https://github.com/privacypriority/privacyanalyzer) uses AI to explain websites' **privacy policies** to the people who use them.
+- [Microsoft Presidio](https://github.com/microsoft/presidio) is a general-purpose framework for detecting and anonymising personal data in text.
+
+Swatva's focus is different. It looks at the data an organization **already holds**, in the spreadsheets, exports and databases where offices actually keep it, and it is built for the non-technical staff who run small colleges, clinics and NGOs: a browser version with nothing to install, Gujarati and Hindi support, and a report a principal can read. If one of these tools fits your need better, use it.
+
 ## Roadmap
 
 Swatva is planned in four parts:
