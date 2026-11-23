@@ -23,7 +23,7 @@
   --code-bg: #F0F2F7;
   --display: "Tiro Devanagari Hindi", Georgia, serif;
   --body: "Hind Vadodara", system-ui, sans-serif;
-  --measure: 760px;
+  --measure: 584px;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
@@ -104,7 +104,7 @@ h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
 .prose p { margin: 0 0 18px; }
 
 .deadline { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-items: start; }
-.deadline > h2, .deadline > p { grid-column: 1; max-width: 62ch; }
+.deadline > h2, .deadline > p { grid-column: 1; max-width: var(--measure); }
 .deadline > p { margin: 0 0 18px; }
 .deadline > .duties { grid-column: 2; grid-row: 1 / span 4; }
 .deadline > p.law { color: var(--muted); font-size: 17px; }
@@ -112,7 +112,7 @@ h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
 .duties li { padding: 18px 0; border-bottom: 1px solid var(--rule); font-size: 19px; line-height: 1.4; }
 
 .ledger { margin: 8px 0 0; border-top: 1px solid var(--rule); }
-.ledger div { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.ledger div { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
 .ledger dt { font-weight: 600; }
 .ledger dd { margin: 0; color: var(--muted); }
 
@@ -135,7 +135,7 @@ code { font-family: var(--mono); font-size: .88em; }
 .faq details[open] summary::after { content: "\2212"; }
 .faq summary:hover { color: var(--ink); }
 .faq summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 3px; }
-.faq .a { padding: 0 40px 20px 0; color: var(--muted); max-width: 66ch; }
+.faq .a { padding: 0 40px 20px 0; color: var(--muted); }
 .faq .a p { margin: 0 0 12px; }
 .faq .a p:last-child { margin: 0; }
 
