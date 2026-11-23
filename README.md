@@ -8,7 +8,7 @@
 
 Swatva (स्वत्व, "what is one's own") is an open-source toolkit that helps small Indian organizations get ready for the Digital Personal Data Protection (DPDP) Act, 2023. It starts with colleges.
 
-From **13 May 2027**, every organization in India that holds personal data has to give proper notices, keep that data safe, report breaches within 72 hours, and answer when someone asks to see, correct or delete their data. There's no exemption for being small. Large companies will buy software and hire consultants. A college with a two-person IT team can't, and the first question it can't answer is simple: **where is our personal data?**
+From **13 May 2027**, every organization in India that holds personal data has to give proper notices, keep that data safe, report breaches within 72 hours, and answer when someone asks to see, correct or delete their data. There's no exemption for being small. Large companies will buy software and hire consultants. A college with one or two people in IT can't, and the first question it can't answer is simple: **where is our personal data?**
 
 That's what this first version does.
 
