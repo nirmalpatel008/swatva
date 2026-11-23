@@ -3,7 +3,7 @@
 Every value here is made up. Aadhaar-style numbers pass the checksum so the
 scanner can be tested, but they were generated at random and belong to no one.
 
-    python scripts/make_sample_data.py            # writes to sample_data/
+    python scripts/make_sample_data.py            # writes sample_data/ and examples/
     python scripts/make_sample_data.py out_dir
 """
 
@@ -201,5 +201,56 @@ def build(out: Path) -> None:
     print(f"Sample college data written to {out}/")
 
 
+def build_excel_example(path: Path) -> None:
+    """A student list the way college offices really keep it: a title above the
+    headers, numbers typed as numbers, real Excel dates, and a second sheet with
+    Gujarati column names. Needs openpyxl."""
+    import datetime as dt
+
+    import openpyxl
+    from openpyxl.styles import Font
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Sem 3 CE"
+    ws.append(["Shree Example Institute of Technology, Surat"])
+    ws.append(["Student List 2026-27, Semester 3, Computer Engineering"])
+    ws.append([])
+    ws.append(["Sr No", "Enrollment No", "Name of Student", "DOB", "Gender", "Mobile No",
+               "Aadhar No", "Caste", "Bank A/c No", "IFSC", "Remarks"])
+    ws["A1"].font = Font(bold=True, size=14)
+    for c in ws[4]:
+        c.font = Font(bold=True)
+    for i in range(60):
+        first, last = rng.choice(FIRST), rng.choice(LAST)
+        born = dob(18, 21)
+        note = rng.choice(["", "", "", f"Father mob {mobile()}", "Scholarship form pending", ""])
+        ws.append([
+            i + 1, int(f"25009010{7000 + i}"), f"{last} {first}",
+            dt.datetime(born.year, born.month, born.day), rng.choice(["M", "F"]),
+            int(mobile()), int(aadhaar()), rng.choice(CATEGORIES), int(account()), ifsc(), note,
+        ])
+    for col, width in zip("ABCDEFGHIJK", [7, 16, 22, 12, 8, 14, 16, 8, 18, 14, 28]):
+        ws.column_dimensions[col].width = width
+    for row in ws.iter_rows(min_row=5, min_col=4, max_col=4):
+        for cell in row:
+            cell.number_format = "DD-MM-YYYY"
+
+    gu = wb.create_sheet("હોસ્ટેલ")
+    gu.append(["ક્રમ", "નામ", "મોબાઇલ", "આધાર નંબર", "રૂમ"])
+    for i in range(30):
+        first = rng.choice(list(FIRST_GU))
+        last = rng.choice(list(LAST_GU))
+        gu.append([i + 1, f"{FIRST_GU[first]} {LAST_GU[last]}", int(mobile()), spaced(aadhaar()), f"B-{rng.randint(101, 220)}"])
+    wb.save(path)
+    print(f"Excel example written to {path}")
+
+
 if __name__ == "__main__":
-    build(Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "sample_data")
+    root = Path(__file__).resolve().parents[1]
+    build(Path(sys.argv[1]) if len(sys.argv) > 1 else root / "sample_data")
+    try:
+        build_excel_example(root / "examples" / "student_list_sem3.xlsx")
+    except ImportError:
+        print("Skipped the Excel example: pip install openpyxl to build it")

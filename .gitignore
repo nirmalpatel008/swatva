@@ -11,3 +11,5 @@ report/
 *.db
 !sample_data/*.db
 *.xlsx
+# only the generated, fake example workbook is allowed
+!examples/student_list_sem3.xlsx

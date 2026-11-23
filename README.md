@@ -48,18 +48,46 @@ See a full example in [`docs/sample-report.md`](docs/sample-report.md).
 
 Needs Python 3.10 or newer.
 
+**Fastest way, no git needed:**
+
+```bash
+pip install git+https://github.com/nirmalpatel008/swatva.git openpyxl
+```
+
+Download the [sample files](https://swatva.org/swatva-sample-data.zip) (all fake), unzip them, and run:
+
+```bash
+python -m swatva scan swatva-sample-data
+```
+
+**Or from a clone, for development:**
+
 ```bash
 git clone https://github.com/nirmalpatel008/swatva.git
 cd swatva
 pip install -e ".[excel]"
 
 # Try it on a fake college, no real data needed
-python scripts/make_sample_data.py
 swatva scan sample_data
+swatva scan examples/student_list_sem3.xlsx
 
 # Then on your own files
 swatva scan path/to/erp.db path/to/admissions.xlsx path/to/folder -o my-report
 ```
+
+### What's in the sample data
+
+Everything is made up: no real person's data is in this repo.
+
+| File | What it shows |
+|---|---|
+| `sample_data/college_erp.db` | A fake college database: students, scholarships, staff, marks, courses |
+| `sample_data/admissions_2026.csv` | An admissions office export |
+| `sample_data/hostel_allotment.csv` | Phone numbers typed into a Remarks column |
+| `sample_data/timetable_sem5.csv` | No personal data, so Swatva should stay quiet |
+| `examples/student_list_sem3.xlsx` | A real-world style Excel sheet: title rows above the headers, numbers stored as numbers, and a second sheet with Gujarati column names |
+
+`python scripts/make_sample_data.py` rebuilds all of them.
 
 Open `my-report/swatva-report.html` in a browser.
 

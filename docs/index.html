@@ -246,13 +246,13 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
   <div class="wrap">
     <h2>Try it on a sample college</h2>
     <div class="prose">
-      <p>You need Python 3.10 or newer. The sample data is entirely made up, so you can see the full report without touching real records.</p>
-<pre><code>git clone https://github.com/nirmalpatel008/swatva.git
-cd swatva
-pip install -e ".[excel]"
-python scripts/make_sample_data.py
-swatva scan sample_data
+      <p>You need Python 3.10 or newer. The sample files are entirely made up, so you can see the full report without touching real records.</p>
+      <p><a class="btn plain" href="swatva-sample-data.zip" download>Download the sample files</a></p>
+      <p style="margin-top:20px">Unzip them, then run:</p>
+<pre><code>pip install git+https://github.com/nirmalpatel008/swatva.git openpyxl
+python -m swatva scan swatva-sample-data
 <span class="c"># then open swatva-report/swatva-report.html</span></code></pre>
+      <p style="margin-top:20px">The download includes a fake college database, office CSV exports, and an Excel student list kept the way offices really keep them, with a title above the headers and a second sheet in Gujarati. When you’re ready, point the same command at your own files. Nothing leaves your machine.</p>
     </div>
   </div>
 </section>
