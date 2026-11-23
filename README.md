@@ -138,7 +138,7 @@ This is a starting point, not a compliance certificate.
 
 ## Read the law
 
-- [Digital Personal Data Protection Act, 2023](https://www.indiacode.nic.in/bitstream/123456789/22037/2/a2023-22.pdf) on India Code
+- [Digital Personal Data Protection Act, 2023](https://www.trai.gov.in/sites/default/files/2024-09/DPDT_11082024.pdf), the text as published in the Gazette (hosted by TRAI)
 - [Digital Personal Data Protection Rules, 2025](https://www.meity.gov.in/documents/act-and-policies/digital-personal-data-protection-rules-2025-gDOxUjMtQWa?pageTitle=Digital-Personal-Data-Protection-Rules-2025) on MeitY's site
 - [DPDP Rules, 2025 Notified](https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf), the government's plain-language explainer from PIB
 
