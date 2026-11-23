@@ -100,24 +100,23 @@ table.reg { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 section.band { padding: 72px 0; border-top: 1px solid var(--rule); }
 h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.4vw, 40px); line-height: 1.15; color: var(--ink); margin: 0 0 20px; }
 h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
-.prose, .ledger, .plan, .faq { max-width: var(--measure); }
-.prose p { margin: 0 0 18px; }
 
-.deadline { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-items: start; }
-.deadline > h2, .deadline > p { grid-column: 1; max-width: var(--measure); }
-.deadline > p { margin: 0 0 18px; }
-.deadline > .duties { grid-column: 2; grid-row: 1 / span 4; }
-.deadline > p.law { color: var(--muted); font-size: 17px; }
-.duties { list-style: none; padding: 0; margin: 6px 0 0; border-top: 1px solid var(--ink); }
-.duties li { padding: 18px 0; border-bottom: 1px solid var(--rule); font-size: 19px; line-height: 1.4; }
+.split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-items: start; }
+.split > .main { max-width: var(--measure); }
+.split > .main > p { margin: 0 0 18px; }
+.split > .main > p:last-child { margin-bottom: 0; }
+p.law { color: var(--muted); font-size: 17px; }
+.rules { list-style: none; padding: 0; margin: 6px 0 0; border-top: 1px solid var(--ink); }
+.rules li { padding: 18px 0; border-bottom: 1px solid var(--rule); font-size: 19px; line-height: 1.4; }
+.rules li b { display: block; font-size: 17px; font-weight: 600; }
+.rules li span { display: block; font-size: 16px; color: var(--muted); margin-top: 2px; }
+.rules li a { text-decoration: none; }
+.rules li a:hover { text-decoration: underline; }
+.rules code { font-size: 15px; }
 
-.ledger { margin: 8px 0 0; border-top: 1px solid var(--rule); }
-.ledger div { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
-.ledger dt { font-weight: 600; }
-.ledger dd { margin: 0; color: var(--muted); }
 
-.plan { list-style: none; padding: 0; margin: 12px 0 0; counter-reset: step; }
-.plan li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); counter-increment: step; }
+.plan { list-style: none; padding: 0; margin: 6px 0 0; counter-reset: step; border-top: 1px solid var(--ink); }
+.plan li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); counter-increment: step; }
 .plan li::before { content: counter(step); font-family: var(--display); font-size: 30px; color: var(--ink); line-height: 1; }
 .plan p { margin: 0; color: var(--muted); }
 .state { font: 400 14px/1 var(--body); color: var(--muted); white-space: nowrap; margin-left: 12px; vertical-align: 2px; }
@@ -127,7 +126,7 @@ pre { background: var(--code-bg); border-radius: 8px; padding: 20px 22px; overfl
 pre .c { color: var(--muted); }
 code { font-family: var(--mono); font-size: .88em; }
 
-.faq { margin: 8px 0 0; border-top: 1px solid var(--ink); }
+.faq { margin: 6px 0 0; border-top: 1px solid var(--ink); }
 .faq details { border-bottom: 1px solid var(--rule); }
 .faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 24px; gap: 16px; align-items: baseline; padding: 18px 0; font-weight: 600; }
 .faq summary::-webkit-details-marker { display: none; }
@@ -146,16 +145,13 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 40px; }
-  .deadline { grid-template-columns: 1fr; }
-  .deadline > .duties { grid-column: 1; grid-row: auto; margin: 6px 0 28px; }
+  .split { grid-template-columns: minmax(0, 1fr); row-gap: 32px; }
   .hero { padding: 48px 0 64px; }
-  .ledger div { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (max-width: 620px) {
   body { font-size: 17px; }
   .wrap { padding: 0 16px; }
   .top { flex-direction: column; gap: 8px; }
-  .plan li { grid-template-columns: 40px minmax(0, 1fr); }
   .register::before { left: 32px; }
   .reg-head, .reg-foot, .reg tr > :first-child { padding-left: 44px; }
   section.band { padding: 56px 0; }
@@ -206,47 +202,62 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 </div>
 
 <section class="band">
-  <div class="wrap deadline">
-    <h2>From 13 May 2027, every college has to answer for the data it keeps</h2>
-    <p>Colleges hold years of Aadhaar and APAAR IDs, scholarship bank details, caste and income certificates, marks and phone numbers. The Digital Personal Data Protection Act, 2023 puts four duties on each of them.</p>
-    <ul class="duties" aria-label="What the DPDP Act requires of every college">
+  <div class="wrap split">
+    <div class="main">
+      <h2>From 13 May 2027, every college has to answer for the data it keeps</h2>
+      <p>Colleges hold years of Aadhaar and APAAR IDs, scholarship bank details, caste and income certificates, marks and phone numbers. The Digital Personal Data Protection Act, 2023 puts four duties on each of them.</p>
+      <p>There’s no exemption for being small. Large institutions will buy software and hire consultants. A college with one or two people in IT can’t, and the first question it struggles with is the simplest one: where is our personal data?</p>
+      <p class="law">Read the law itself: the <a href="https://www.trai.gov.in/sites/default/files/2024-09/DPDT_11082024.pdf">Digital Personal Data Protection Act, 2023</a> as published in the Gazette, the <a href="https://www.meity.gov.in/documents/act-and-policies/digital-personal-data-protection-rules-2025-gDOxUjMtQWa?pageTitle=Digital-Personal-Data-Protection-Rules-2025">DPDP Rules, 2025</a> on MeitY’s site, and the government’s <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf">plain-language explainer</a> from PIB.</p>
+    </div>
+    <ul class="rules side" aria-label="What the DPDP Act requires of every college">
       <li>Tell students what it collects and why</li>
       <li>Keep that data safe from leaks and misuse</li>
       <li>Report a breach within 72 hours</li>
       <li>Let students see, correct or delete their data</li>
     </ul>
-    <p>There’s no exemption for being small. Large institutions will buy software and hire consultants. A college with one or two people in IT can’t, and the first question it struggles with is the simplest one: where is our personal data?</p>
-    <p class="law">Read the law itself: the <a href="https://www.trai.gov.in/sites/default/files/2024-09/DPDT_11082024.pdf">Digital Personal Data Protection Act, 2023</a> as published in the Gazette, the <a href="https://www.meity.gov.in/documents/act-and-policies/digital-personal-data-protection-rules-2025-gDOxUjMtQWa?pageTitle=Digital-Personal-Data-Protection-Rules-2025">DPDP Rules, 2025</a> on MeitY’s site, and the government’s <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf">plain-language explainer</a> from PIB.</p>
   </div>
 </section>
 
 <section class="band">
-  <div class="wrap">
-    <h2>What it finds</h2>
-    <div class="prose">
-      <p>Point Swatva at SQLite databases, CSV files, Excel workbooks or a whole folder. It checks a sample of every table and tells you which columns hold Aadhaar, APAAR, PAN, mobile numbers, email, bank details, dates of birth, caste or category, income, disability status, addresses and names, in English, Gujarati and Hindi.</p>
+  <div class="wrap split">
+    <div class="main">
+      <h2>What it finds</h2>
+      <p>Point Swatva at SQLite databases, CSV files, Excel workbooks or a whole folder. It checks a sample of every table and tells you which columns hold personal data, whether the headers are in English, Gujarati or Hindi.</p>
       <p>It also flags records of people under 18, who need verifiable parental consent, and finds the phone numbers and emails that staff typed into remarks columns. That’s the data people forget when they delete a student’s records.</p>
       <p><a href="sample-report.html">See the report it produces for a sample college</a></p>
     </div>
+    <ul class="rules side" aria-label="Kinds of personal data Swatva looks for">
+      <li>Aadhaar and APAAR IDs</li>
+      <li>PAN and bank account details</li>
+      <li>Mobile numbers and email</li>
+      <li>Caste, income and disability</li>
+      <li>Dates of birth</li>
+      <li>Names and addresses</li>
+    </ul>
   </div>
 </section>
 
 <section class="band">
-  <div class="wrap">
-    <h2>Built to be safe to run</h2>
-    <dl class="ledger">
-      <div><dt>Nothing leaves your machine</dt><dd>No cloud, no upload, no tracking. The installed tool makes no network calls, and the browser version scans your file inside the page.</dd></div>
-      <div><dt>Read-only</dt><dd>Files and databases are opened for reading. Swatva never changes your data.</dd></div>
-      <div><dt>Masked reports</dt><dd>Reports never show full identifiers, so you can share one with your principal or auditor.</dd></div>
-    </dl>
+  <div class="wrap split">
+    <div class="main">
+      <h2>Built to be safe to run</h2>
+      <p>Swatva is meant to be run by a college’s own staff on real student records, so it’s careful by default. You don’t need to trust a vendor or sign a data agreement to use it.</p>
+    </div>
+    <ul class="rules side">
+      <li><b>Nothing leaves your machine</b><span>No cloud, no upload, no tracking. The installed tool makes no network calls, and the browser version scans your file inside the page.</span></li>
+      <li><b>Read-only</b><span>Files and databases are opened for reading. Swatva never changes your data.</span></li>
+      <li><b>Masked reports</b><span>Reports never show full identifiers, so you can share one with your principal or auditor.</span></li>
+    </ul>
   </div>
 </section>
 
 <section class="band">
-  <div class="wrap">
-    <h2>The plan</h2>
-    <p class="prose" style="color:var(--muted);margin:0">Swatva grows in four steps, built with the colleges that use it. Their IT staff decide what it checks first.</p>
-    <ol class="plan">
+  <div class="wrap split">
+    <div class="main">
+      <h2>The plan</h2>
+      <p>Swatva grows in four steps, built with the colleges that use it. Their IT staff decide what it checks first.</p>
+    </div>
+    <ol class="plan side">
       <li><div><h3>Find <span class="state live">Available now</span></h3><p>Map where personal data lives across databases and files.</p></div></li>
       <li><div><h3>Track <span class="state">2027</span></h3><p>Keep a change log of personal data, so a college can show what happened to a record and when.</p></div></li>
       <li><div><h3>Act <span class="state">2027</span></h3><p>Answer a student’s request to see or delete their data in one search, and walk staff through a breach report.</p></div></li>
@@ -256,25 +267,33 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 </section>
 
 <section class="band" id="try">
-  <div class="wrap">
-    <h2>Try it on a sample college</h2>
-    <div class="prose">
+  <div class="wrap split">
+    <div class="main">
+      <h2>Try it on a sample college</h2>
       <p>The quickest way is <a href="try.html">in your browser</a>: choose an Excel or CSV file and see the report straight away. Nothing is uploaded.</p>
       <p>To run it on your own computer, you need Python 3.10 or newer. The sample files are entirely made up, so you can see the full report without touching real records.</p>
       <p><a class="btn plain" href="swatva-sample-data.zip" download>Download the sample files</a></p>
-      <p style="margin-top:20px">Unzip them, then run:</p>
+      <p>Unzip them, then run:</p>
 <pre><code>pip install git+https://github.com/nirmalpatel008/swatva.git openpyxl
 python -m swatva scan swatva-sample-data
 <span class="c"># then open swatva-report/swatva-report.html</span></code></pre>
-      <p style="margin-top:20px">The download includes a fake college database, office CSV exports, and an Excel student list kept the way offices really keep them, with a title above the headers and a second sheet in Gujarati. When you’re ready, point the same command at your own files. Nothing leaves your machine.</p>
+      <p style="margin-top:20px">When you’re ready, point the same command at your own files. Nothing leaves your machine.</p>
     </div>
+    <ul class="rules side" aria-label="Files in the sample download">
+      <li><b><code>college_erp.db</code></b><span>A fake college database with students, scholarships, staff, marks and courses</span></li>
+      <li><b><code>admissions_2026.csv</code></b><span>An admissions office export</span></li>
+      <li><b><code>hostel_allotment.csv</code></b><span>Phone numbers typed into a remarks column</span></li>
+      <li><b><code>timetable_sem5.csv</code></b><span>No personal data, so Swatva should stay quiet</span></li>
+      <li><b><code>student_list_sem3.xlsx</code></b><span>Kept the way offices really keep it, with a title above the headers and a second sheet in Gujarati</span></li>
+    </ul>
   </div>
 </section>
 
 <section class="band" id="faq">
-  <div class="wrap">
-    <h2>Questions colleges ask</h2>
-    <div class="faq">
+  <div class="wrap split">
+    <div class="main">
+      <h2>Questions colleges ask</h2>
+      <div class="faq">
       <details><summary>Are my files uploaded anywhere?</summary><div class="a"><p>No. The installed tool makes no network calls. The browser version downloads Swatva’s code the first time, then reads your file inside the page. Your file is never sent to a server, including ours.</p></div></details>
       <details><summary>Will running Swatva make our college DPDP compliant?</summary><div class="a"><p>No. It tells you where personal data sits, which is the first thing you need to know. Compliance also means giving notices, getting consent, securing the data and answering students’ requests. Swatva doesn’t give legal advice, so check your plan with a lawyer.</p></div></details>
       <details><summary>What does it cost?</summary><div class="a"><p>Nothing. Swatva is open source under the MIT license, so you can use it, change it and share it, including inside your college’s own systems.</p></div></details>
@@ -283,7 +302,13 @@ python -m swatva scan swatva-sample-data
       <details><summary>Is it safe to run on our live database?</summary><div class="a"><p>Swatva only reads. It never writes, changes or deletes anything. To be extra careful, run it on a copy or an export.</p></div></details>
       <details><summary>Who builds it?</summary><div class="a"><p>Nirmal Chhodvadiya, a data engineer in Surat with 6+ years in cloud and data, three of them on the AWS India Big Data team. Swatva is built in the open with the colleges that use it.</p></div></details>
       <details><summary>How can I help?</summary><div class="a"><p>Run it on your college’s files and tell us what it missed or got wrong by <a href="https://github.com/nirmalpatel008/swatva/issues">opening an issue on GitHub</a>. Column names from your own office files, in any language, help the most. Code and translations are welcome too.</p></div></details>
+      </div>
     </div>
+    <ul class="rules side" aria-label="More help">
+      <li><a href="https://github.com/nirmalpatel008/swatva/issues">Ask a question on GitHub</a></li>
+      <li><a href="sample-report.html">See a sample report</a></li>
+      <li><a href="try.html">Try it in your browser</a></li>
+    </ul>
   </div>
 </section>
 
