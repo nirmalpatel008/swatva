@@ -14,3 +14,4 @@ report/
 # only the generated, fake example workbook is allowed
 !examples/student_list_sem3.xlsx
 !docs/try/student_list_sem3.xlsx
+*.patch
