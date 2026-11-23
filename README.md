@@ -46,7 +46,9 @@ See a full example in [`docs/sample-report.md`](docs/sample-report.md).
 
 ## Quick start
 
-Needs Python 3.10 or newer.
+**No install at all:** open [swatva.org/try.html](https://swatva.org/try.html), choose an Excel, CSV or SQLite file, and the report appears in your browser. The file is read and scanned on the page itself and never uploaded.
+
+To run it on your own computer, you need Python 3.10 or newer.
 
 **Fastest way, no git needed:**
 
@@ -151,7 +153,7 @@ Issues and pull requests are welcome, especially:
 - better Gujarati, Hindi and other Indian-language support
 - real-world column names from college ERPs (names only, never data)
 
-Run the tests with `pip install -e ".[dev]" && pytest`.
+Run the tests with `pip install -e ".[dev]" && pytest`. The browser version in `docs/try/` runs a copy of the same code: after changing anything in `swatva/`, run `python scripts/sync_web.py` (a test checks the copy is current).
 
 **Never commit real personal data**, not even in an issue. Use `scripts/make_sample_data.py` to build test data. Every value it makes is fake.
 

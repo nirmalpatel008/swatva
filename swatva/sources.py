@@ -9,7 +9,6 @@ from __future__ import annotations
 import csv
 import io
 import os
-import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -90,6 +89,8 @@ def _split_header(raw: list[list[str]]) -> tuple[list[str], list[list[str]]]:
 
 
 def read_sqlite(path: Path, sample: int) -> Iterator[Table]:
+    import sqlite3  # loaded only when a database is scanned (keeps the browser version light)
+
     uri = f"file:{path.resolve().as_posix()}?mode=ro"
     con = sqlite3.connect(uri, uri=True)
     try:
