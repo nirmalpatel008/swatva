@@ -91,7 +91,7 @@ Options: `--sample 5000` reads more rows per table, `--format html` writes only 
 
 That last row matters. The data people forget about when they delete a student's records is usually sitting in a notes column.
 
-It reads **SQLite** databases, **CSV / TSV** files, **Excel** workbooks (every sheet), and whole folders of them.
+It reads **SQLite** databases, **CSV / TSV** files (including Excel's UTF-16 "Unicode text" exports), **Excel** workbooks (every sheet), and whole folders of them. It copes with the way college sheets are really kept: title rows above the headers, column names in Gujarati or Hindi, and phone or ID numbers stored as numbers. Old `.xls` files need to be saved as `.xlsx` first.
 
 ## Limits
 

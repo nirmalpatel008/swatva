@@ -11,13 +11,16 @@ import io
 import os
 import sqlite3
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Iterator
 
 SQLITE_EXT = {".db", ".sqlite", ".sqlite3"}
 CSV_EXT = {".csv", ".tsv"}
 EXCEL_EXT = {".xlsx", ".xlsm"}
-SUPPORTED = SQLITE_EXT | CSV_EXT | EXCEL_EXT
+OLD_EXCEL_EXT = {".xls"}
+SUPPORTED = SQLITE_EXT | CSV_EXT | EXCEL_EXT | OLD_EXCEL_EXT
+HEADER_SEARCH_ROWS = 15
 
 
 @dataclass
@@ -39,11 +42,51 @@ class Table:
 
 
 def _s(v) -> str:
-    if v is None:
+    if v is None or isinstance(v, bytes):
         return ""
-    if isinstance(v, bytes):
-        return ""
+    if isinstance(v, float) and v.is_integer() and abs(v) < 1e18:
+        return str(int(v))  # Excel often stores phone and ID numbers as 9876543210.0
+    if isinstance(v, datetime):
+        return v.date().isoformat() if (v.hour, v.minute, v.second) == (0, 0, 0) else v.isoformat(sep=" ")
     return str(v)
+
+
+def _is_numberish(v: str) -> bool:
+    t = v.strip().replace(",", "").replace(" ", "")
+    return t.replace(".", "", 1).lstrip("+-").isdigit()
+
+
+def find_header(rows: list[list[str]]) -> int:
+    """Index of the header row among the first rows of a sheet.
+
+    College sheets often start with a title ("ABC Institute ... Student List
+    2025-26") and a blank line before the real column names. The header is
+    the first row that is about as wide as the table and is mostly words.
+    """
+    top = rows[:HEADER_SEARCH_ROWS]
+    widths = [sum(1 for c in r if c.strip()) for r in top]
+    if not widths:
+        return 0
+    widest = max(widths)
+    for i, r in enumerate(top):
+        cells = [c for c in r if c.strip()]
+        if len(cells) >= max(2, 0.6 * widest):
+            words = sum(1 for c in cells if not _is_numberish(c))
+            if words >= 0.7 * len(cells):
+                return i
+    return 0
+
+
+def _split_header(raw: list[list[str]]) -> tuple[list[str], list[list[str]]]:
+    h = find_header(raw)
+    header = raw[h] if raw else []
+    body = raw[h + 1:]
+    width = max([len(header)] + [len(r) for r in body[:50]]) if raw else 0
+    cols = []
+    for i in range(width):
+        name = header[i].strip() if i < len(header) else ""
+        cols.append(name or f"column_{i + 1}")
+    return cols, body
 
 
 def read_sqlite(path: Path, sample: int) -> Iterator[Table]:
@@ -69,6 +112,8 @@ def read_sqlite(path: Path, sample: int) -> Iterator[Table]:
 
 def _open_text(path: Path) -> str:
     raw = path.read_bytes()
+    if raw[:2] in (b"\xff\xfe", b"\xfe\xff"):  # Excel "Unicode text" export
+        return raw.decode("utf-16")
     for enc in ("utf-8-sig", "cp1252", "latin-1"):
         try:
             return raw.decode(enc)
@@ -85,18 +130,14 @@ def read_csv(path: Path, sample: int) -> Iterator[Table]:
             delim = csv.Sniffer().sniff(text[:4096], delimiters=",;\t|").delimiter
         except csv.Error:
             pass
-    reader = csv.reader(io.StringIO(text), delimiter=delim)
-    header = next(reader, None)
-    if not header:
+    all_rows = [r for r in csv.reader(io.StringIO(text), delimiter=delim)]
+    if not any(any(c.strip() for c in r) for r in all_rows):
         return
-    rows, total = [], 0
-    for r in reader:
-        if not any(c.strip() for c in r):
-            continue
-        total += 1
-        if len(rows) < sample:
-            rows.append(r)
-    yield Table(str(path), "csv", path.stem, [h.strip() for h in header], rows, total)
+    head = [r for r in all_rows[:HEADER_SEARCH_ROWS + 1]]
+    h = find_header(head)
+    cols, _ = _split_header(all_rows[: h + 51])
+    body = [r for r in all_rows[h + 1:] if any(c.strip() for c in r)]
+    yield Table(str(path), "csv", path.stem, cols, body[:sample], len(body))
 
 
 def read_excel(path: Path, sample: int) -> Iterator[Table]:
@@ -108,18 +149,24 @@ def read_excel(path: Path, sample: int) -> Iterator[Table]:
     try:
         for ws in wb.worksheets:
             it = ws.iter_rows(values_only=True)
-            header = next(it, None)
-            if not header:
+            head = []
+            for r in it:
+                head.append([_s(v) for v in r])
+                if len(head) > HEADER_SEARCH_ROWS:
+                    break
+            if not any(any(c.strip() for c in r) for r in head):
                 continue
-            cols = [_s(h).strip() or f"column_{i + 1}" for i, h in enumerate(header)]
-            rows, total = [], 0
+            h = find_header(head)
+            cols, body = _split_header(head)
+            rows = [r for r in body if any(c.strip() for c in r)]
+            total = len(rows)
             for r in it:
                 if not any(v not in (None, "") for v in r):
                     continue
                 total += 1
                 if len(rows) < sample:
                     rows.append([_s(v) for v in r])
-            yield Table(str(path), "excel", ws.title, cols, rows, total)
+            yield Table(str(path), "excel", ws.title, cols, rows[:sample], total)
     finally:
         wb.close()
 
@@ -151,5 +198,7 @@ def read_tables(path: Path, sample: int) -> Iterator[Table]:
         yield from read_csv(path, sample)
     elif ext in EXCEL_EXT:
         yield from read_excel(path, sample)
+    elif ext in OLD_EXCEL_EXT:
+        raise ValueError("old .xls format is not supported yet. Open it in Excel and use Save As > .xlsx, then scan again")
     else:
         raise ValueError(f"Unsupported file type: {path.name}")

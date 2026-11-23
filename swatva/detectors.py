@@ -224,7 +224,7 @@ NOT_PERSON_NAME = _h(
 DETECTORS: list[Detector] = [
     Detector(
         "aadhaar", "Aadhaar number", "identity", is_aadhaar,
-        _h(r"aadh?aa?r|\buid\b|uidai"), needs_hint=False, hint_only_ok=False,
+        _h(r"aadh?aa?r|\buid\b|uidai|આધાર|आधार"), needs_hint=False, hint_only_ok=False,
         mask=mask_keep_last4,
         note="Keep only if a rule requires it. Store the masked form (last 4 digits) wherever possible.",
         sensitive=True,
@@ -243,13 +243,13 @@ DETECTORS: list[Detector] = [
     ),
     Detector(
         "phone", "Mobile number", "contact", is_phone,
-        _h(r"mobile|phone|contact|whatsapp|\bmob\b|cell"), needs_hint=False, hint_only_ok=False,
+        _h(r"mobile|phone|contact|whatsapp|\bmob\b|cell|મોબાઇલ|મોબાઈલ|ફોન|मोबाइल|फ़ोन|फोन"), needs_hint=False, hint_only_ok=False,
         mask=mask_keep_last4,
         note="Contact data. Use it only for the purpose it was collected for.",
     ),
     Detector(
         "email", "Email address", "contact", is_email,
-        _h(r"e\s?mail|mail\s?id"), needs_hint=False, hint_only_ok=False,
+        _h(r"e\s?mail|mail\s?id|ઈમેલ|ઇમેલ|ईमेल"), needs_hint=False, hint_only_ok=False,
         mask=mask_email,
         note="Contact data. Use it only for the purpose it was collected for.",
     ),
@@ -261,20 +261,20 @@ DETECTORS: list[Detector] = [
     ),
     Detector(
         "bank_account", "Bank account number", "financial", is_account,
-        _h(r"(bank|acc(oun)?t|\ba\s?c\b)(\s?(no|num|number))?"), needs_hint=True, hint_only_ok=False,
+        _h(r"(bank|acc(oun)?t|\ba\s?c\b)(\s?(no|num|number))?|ખાતા|बैंक|खाता"), needs_hint=True, hint_only_ok=False,
         mask=mask_keep_last4,
         note="Financial data. Restrict access and delete once payments are settled.",
         sensitive=True,
     ),
     Detector(
         "dob", "Date of birth", "personal", is_date,
-        _h(r"\bdob\b|birth|b\s?date|date\s?of\s?birth"), needs_hint=True, hint_only_ok=False,
+        _h(r"\bdob\b|birth|b\s?date|date\s?of\s?birth|જન્મ|जन्म"), needs_hint=True, hint_only_ok=False,
         mask=mask_date,
         note="Shows age. Records of anyone under 18 need verifiable parental consent under DPDP.",
     ),
     Detector(
         "caste", "Caste / category", "sensitive", is_category,
-        _h(r"caste|category|community|reservation|quota|\bcat\b"), needs_hint=False, hint_only_ok=True,
+        _h(r"caste|category|community|reservation|quota|\bcat\b|જાતિ|જ્ઞાતિ|કેટેગરી|जाति|श्रेणी"), needs_hint=False, hint_only_ok=True,
         mask=mask_all,
         note="Highly sensitive. Keep it only where reservation or scholarship rules need it, with tight access.",
         sensitive=True,
@@ -301,7 +301,7 @@ DETECTORS: list[Detector] = [
     ),
     Detector(
         "address", "Address", "personal", is_text,
-        _h(r"address|addr|street|locality|residence"), needs_hint=True, hint_only_ok=True,
+        _h(r"address|addr|street|locality|residence|સરનામું|सरनामु|पता"), needs_hint=True, hint_only_ok=True,
         mask=mask_all,
         note="Home address. Limit who can see it.",
     ),
@@ -313,7 +313,7 @@ DETECTORS: list[Detector] = [
     ),
     Detector(
         "person_name", "Person's name", "personal", is_name,
-        _h(r"name|guardian|father|mother|parent"), needs_hint=True, hint_only_ok=False,
+        _h(r"name|guardian|father|mother|parent|^(student|candidate|applicant|employee|staff|faculty)$|નામ|પિતા|માતા|नाम|पिता|माता"), needs_hint=True, hint_only_ok=False,
         mask=mask_name,
         note="Names make every other field in the row personal data.",
     ),
@@ -370,7 +370,7 @@ _RANK = {"high": 2, "medium": 1}
 
 def normalize_name(name: str) -> str:
     """'Roll_No', 'roll-no' and 'Roll No' all become 'Roll No' for hint matching."""
-    return re.sub(r"[^0-9A-Za-z]+", " ", name).strip()
+    return re.sub(r"[\s_\-./\\,:;()\[\]#|*]+", " ", name).strip()
 
 
 def classify_column(name: str, values: list[str], today: Optional[date] = None) -> Optional[ColumnFinding]:
