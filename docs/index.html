@@ -102,8 +102,12 @@ h3 { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
 .prose { max-width: 66ch; }
 .prose p { margin: 0 0 18px; }
 
-.duties { list-style: none; padding: 0; margin: 8px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
-.duties li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.deadline { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-items: start; }
+.deadline > h2, .deadline > p { grid-column: 1; max-width: 62ch; }
+.deadline > p { margin: 0 0 18px; }
+.deadline > .duties { grid-column: 2; grid-row: 1 / span 3; }
+.duties { list-style: none; padding: 0; margin: 6px 0 0; border-top: 1px solid var(--ink); }
+.duties li { padding: 18px 0; border-bottom: 1px solid var(--rule); font-size: 19px; line-height: 1.4; }
 
 .ledger { margin: 8px 0 0; border-top: 1px solid var(--rule); max-width: 880px; }
 .ledger div { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
@@ -128,6 +132,8 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 40px; }
+  .deadline { grid-template-columns: 1fr; }
+  .deadline > .duties { grid-column: 1; grid-row: auto; margin: 6px 0 28px; }
   .hero { padding: 48px 0 64px; }
   .ledger div { grid-template-columns: 1fr; gap: 4px; }
 }
@@ -135,7 +141,6 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
   body { font-size: 17px; }
   .wrap { padding: 0 16px; }
   .top { flex-direction: column; gap: 8px; }
-  .duties { grid-template-columns: 1fr; }
   .plan li { grid-template-columns: 40px minmax(0, 1fr); }
   .plan .state { grid-column: 2; }
   .register::before { left: 32px; }
@@ -187,17 +192,17 @@ footer .word { font-family: var(--display); font-size: 18px; color: var(--ink); 
 </div>
 
 <section class="band">
-  <div class="wrap"><div class="prose">
+  <div class="wrap deadline">
     <h2>From 13 May 2027, every college has to answer for the data it keeps</h2>
-    <p>Colleges hold years of Aadhaar and APAAR IDs, scholarship bank details, caste and income certificates, marks and phone numbers. Under the Digital Personal Data Protection Act, 2023, each of them will have to:</p>
-    <ul class="duties">
+    <p>Colleges hold years of Aadhaar and APAAR IDs, scholarship bank details, caste and income certificates, marks and phone numbers. The Digital Personal Data Protection Act, 2023 puts four duties on each of them.</p>
+    <ul class="duties" aria-label="What the DPDP Act requires of every college">
       <li>Tell students what it collects and why</li>
       <li>Keep that data safe from leaks and misuse</li>
       <li>Report a breach within 72 hours</li>
       <li>Let students see, correct or delete their data</li>
     </ul>
-    <p style="margin-top:24px">There’s no exemption for being small. Large institutions will buy software and hire consultants. A college with a two-person IT team can’t, and the first question it struggles with is the simplest one: where is our personal data?</p>
-  </div></div>
+    <p>There’s no exemption for being small. Large institutions will buy software and hire consultants. A college with a two-person IT team can’t, and the first question it struggles with is the simplest one: where is our personal data?</p>
+  </div>
 </section>
 
 <section class="band">
