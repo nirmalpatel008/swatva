@@ -4,7 +4,7 @@
 
 **Find the personal data your organization holds, on your own machine, for free.**
 
-[Website](https://swatva.org) | [Try it in your browser](https://swatva.org/try.html) | [Sample report](https://swatva.org/sample-report.html) | [Changelog](CHANGELOG.md)
+[Website](https://swatva.org) | [Try it in your browser](https://swatva.org/try.html) | [Sample report](https://swatva.org/sample-report.html) | [Changelog](CHANGELOG.md) | [Sponsor](https://github.com/sponsors/nirmalpatel008)
 
 Swatva (स्वत्व, "what is one's own") is an open-source toolkit that helps small Indian organizations get ready for the Digital Personal Data Protection (DPDP) Act, 2023. It starts with colleges.
 
@@ -180,6 +180,12 @@ Issues and pull requests are welcome, especially:
 Run the tests with `pip install -e ".[dev]" && pytest`. The browser version in `docs/try/` runs a copy of the same code: after changing anything in `swatva/`, run `python scripts/sync_web.py` (a test checks the copy is current).
 
 **Never commit real personal data**, not even in an issue. Use `scripts/make_sample_data.py` to build test data. Every value it makes is fake.
+
+## Sponsor
+
+Swatva is free and will stay free. Sponsorship pays for the time it takes to add detectors and languages, and to help colleges run it on their own records. Nothing is ever locked behind a paywall.
+
+If Swatva is useful to you, or you'd like more colleges to have it, you can [sponsor the work on GitHub](https://github.com/sponsors/nirmalpatel008).
 
 ## License
 
